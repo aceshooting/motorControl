@@ -1,5 +1,6 @@
 package testpi;
 
+import com.pi4j.component.motor.impl.GpioStepperMotorComponent;
 import com.pi4j.io.gpio.*;
 import io.undertow.Undertow;
 import io.undertow.server.handlers.resource.ClassPathResourceManager;
@@ -41,7 +42,7 @@ public class App implements Runnable {
         // create gpio controller
         final GpioController gpio = GpioFactory.getInstance();
 
-     /*  // provision gpio pins #00 to #03 as output pins and ensure in LOW state
+       // provision gpio pins #00 to #03 as output pins and ensure in LOW state
         final GpioPinDigitalOutput[] pins = {
                 gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, PinState.LOW),
                 gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, PinState.LOW),
@@ -97,7 +98,7 @@ public class App implements Runnable {
         // There are 32 steps per revolution on my sample motor, and inside is a ~1/64 reduction gear set.
         // Gear reduction is actually: (32/9)/(22/11)x(26/9)x(31/10)=63.683950617
         // This means is that there are really 32*63.683950617 steps per revolution =  2037.88641975 ~ 2038 steps!
-        motor.setStepsPerRevolution(2038);*/
+        motor.setStepsPerRevolution(2038);
 
 
 
@@ -117,7 +118,7 @@ public class App implements Runnable {
                                         if(data.trim().equals("start")){
                                              System.out.println("Start clicked !!!");
                                             System.out.println("   Motor FORWARD for 2038 steps.");
-                                        //    motor.step(2038);
+                                            motor.step(2038);
                                             System.out.println("   Motor STOPPED for 2 seconds.");
                                             try {
                                                 Thread.sleep(2000);
@@ -129,7 +130,7 @@ public class App implements Runnable {
                                             System.out.println("Stop clicked !!!");
 
                                             System.out.println("   Motor REVERSE for 2038 steps.");
-                                       //     motor.step(-2038);
+                                           motor.step(-2038);
                                             System.out.println("   Motor STOPPED for 2 seconds.");
                                             try {
                                                 Thread.sleep(2000);
