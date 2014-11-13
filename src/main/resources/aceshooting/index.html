@@ -10,13 +10,9 @@
 
   <script src="js/jquery-2.1.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/platform.js">
   </script>
 
-  <link rel="import" href="bower_components/font-roboto/roboto.html">
-    <link rel="import" href="bower_components/paper-button/paper-button.html">
-  <link rel="import" href="bower_components/paper-input/paper-input.html">
-    <link rel="import" href="bower_components/polymer-ui-toggle-button/polymer-ui-toggle-button.html">
+
  <style>
         html, body {
             height: 100%;
@@ -36,18 +32,6 @@
             color: white;
         }
 
-     paper-button{
-         background: #4285f4;
-         color: #fff;
-         font-size: 9px;
-         max-width: inherit;
-         max-height: inherit;
-     }
-     paper-input{
-         font-size: 9px;
-         max-width: inherit;
-         max-height: inherit;
-     }
      
     </style>
 </head>
@@ -71,60 +55,61 @@
     }
 
         function calcR(message) {
-            var v = parseInt(document.querySelector("paper-input#lblrun").label);
+            var v = parseInt(document.getElementById("rval").value);
             v= v+parseInt(message);
+			console.log(v);
             if(v<=1000){
-               document.querySelector("paper-button#btnr1000").disabled = true;
+               document.getElementById("btnr1000").disabled = true;
             }
             else{
-                document.querySelector("paper-button#btnr1000").disabled = false; 
+                document.getElementById("btnr1000").disabled = false; 
             }
             
             if(v<=50){
-                document.querySelector("paper-button#btnr50").disabled = true;
+                document.getElementById("btnr50").disabled = true;
             }
             else{
-                document.querySelector("paper-button#btnr50").disabled = false;
+                document.getElementById("btnr50").disabled = false;
             }
-            document.querySelector("paper-input#lblrun").label=v; 
+            document.getElementById("rval").value=v; 
             
             var str1 = "r,";
-            send(str1.concat(document.querySelector("paper-input#lblrun").label));
+            send(str1.concat(v));
         }
         
         function calcS(message) {
-            var v = parseInt(document.querySelector("paper-input#lblstop").label);
+               var v = parseInt(document.getElementById("sval").value);
             v= v+parseInt(message);
             if(v<1000){
-               document.querySelector("paper-button#btns1000").disabled = true;
+               document.getElementById("btns1000").disabled = true;
             }
             else{
-                document.querySelector("paper-button#btns1000").disabled = false; 
+                document.getElementById("btns1000").disabled = false; 
             }
             
             if(v<50){
-                document.querySelector("paper-button#btns50").disabled = true;
+                document.getElementById("btns50").disabled = true;
             }
             else{
-                document.querySelector("paper-button#btns50").disabled = false;
+                document.getElementById("btns50").disabled = false;
             }
-            document.querySelector("paper-input#lblstop").label=v; 
+            document.getElementById("sval").value=v; 
             
             var str1 = "s,";
-            send(str1.concat(document.querySelector("paper-input#lblstop").label));
+            send(str1.concat(v));
        
         }
         
     function sendState(){
-        if(document.querySelector("polymer-ui-toggle-button#btnState").value){
-            send("stop");
+        if(document.getElementById("btnState").checked){
+            send("start");
         }
         else{
-            send("start");
+            send("stop");
         }
     }
         function sendDirection(){
-            if(document.querySelector("polymer-ui-toggle-button#btnDirection").value){
+            if(document.getElementById("btnDirection").checked){
             send("forward");
         }
         else{
@@ -144,7 +129,7 @@
     }
 </script>
     
-    <table style="table-layout: fixed;width: 380px; height:240px">
+    <table style="table-layout: fixed;width: 340px; height:240px">
           <col width="55px">
   <col width="55px">
           <col width="100px">
@@ -154,35 +139,35 @@
           <td style="width:360px; font-size: 12px; font-weight: bold;" colspan="5"><core-label>Please select the run time then stop time (in ms):</core-label></td>
       </tr>
       <tr style="height:40px">
-          <td style="width:55px"><paper-button raised style="width:55" id="btnr1000" onclick="calcR('-1000');">-1sec</paper-button></td>
-          <td style="width:55px"><paper-button raised id="btnr50" onclick="calcR('-50');">-50ms</paper-button></td>
-          <td style="width:100px"><paper-input label='2000' id="lblrun"></paper-input></td>          
-          <td style="width:55px"><paper-button raised onclick="calcR('+50');">+50ms</paper-button></td>
-          <td style="width:55px"><paper-button raised onclick="calcR('+1000');">+1sec</paper-button></td>
+          <td style="width:55px"><button type="button" style="width:50" id="btnr1000" onclick="calcR('-1000');">-1sec</button></td>
+          <td style="width:55px"><button type="button" style="width:50" id="btnr50" onclick="calcR('-50');">-50ms</button></td>
+          <td style="width:100px"><input type="text" name="rval" id ="rval" value="2000" style="width: 100px;"></input></td>          
+          <td style="width:55px"><button type="button" style="width:50" onclick="calcR('+50');">+50ms</button></td>
+          <td style="width:55px"><button type="button" style="width:50" onclick="calcR('+1000');">+1sec</button></td>
       </tr>
          <tr style="height:40px">
-          <td style="width:55px"><paper-button raised style="width:55" id="btns1000" onclick="calcS('-1000');">-1sec</paper-button></td>
-          <td style="width:55px"><paper-button raised id="btns50" onclick="calcS('-50');">-50ms</paper-button></td>
-          <td style="width:100px"><paper-input label='2000' id="lblstop"></paper-input></td>          
-          <td style="width:55px"><paper-button raised onclick="calcS('+50');">+50ms</paper-button></td>
-          <td style="width:55px"><paper-button raised onclick="calcS('+1000');">+1sec</paper-button></td>
+          <td style="width:55px"><button type="button" style="width:55" id="btns1000" onclick="calcS('-1000');">-1sec</button></td>
+          <td style="width:55px"><button type="button" style="width:50" id="btns50" onclick="calcS('-50');">-50ms</button></td>
+          <td style="width:100px"><input type="text" name="sval" id ="sval" value="2000" style="width: 100px;"></input></td>          
+          <td style="width:55px"><button type="button" style="width:50"  onclick="calcS('+50');">+50ms</button></td>
+          <td style="width:55px"><button type="button" style="width:50" onclick="calcS('+1000');">+1sec</button></td>
       </tr>        
         
          <tr style="height:40px">
-          <td style="width:110px" colspan="2" align="center"><polymer-ui-toggle-button style="width:100px" id="btnState" onCaption="Start" offCaption="Stop" onclick="sendState()"></polymer-ui-toggle-button></td>
+          <td style="width:110px" colspan="2" align="center"><input type="checkbox" name="btnState" id="btnState" value="btnState" style="width:100px" id="btnState" onclick="sendState()">Start</input></td>
               <td style="width:55px"></td>
-            <td style="width:110px" colspan="2" align="center"><polymer-ui-toggle-button style="width:100px" id="btnDirection" onCaption="Backward" offCaption="Forward" onclick="sendDirection()"></polymer-ui-toggle-button></td>
+            <td style="width:110px" colspan="2" align="center"><input type="checkbox" name="btnDirection" id="btnDirection" value="btnDirection" style="width:100px" id="btnDirection" onclick="sendDirection()">Forward</input></td>
            
       </tr>
          <tr style="height:40px">
           <td style="width:55px"></td>
             <td style="width:55px"></td>
-            <td style="width:100px"><paper-button raised style="width:100px; background: #f41e1e;" onclick="send('shutdown');">Shutdown</paper-button></td>
+            <td style="width:100px"><button style="width:100px; background: #f41e1e;" onclick="send('shutdown');">Shutdown</button></td>
             <td style="width:55px"></td>
             <td style="width:55px"></td>
              </tr>
       <tr style="height:30px"> 
-          <td style="width:360px; font-size: 12px;" colspan="5" align="center"><core-label>Developped by: <a href="http://www.aceshooting.com">www.aceshooting.com</a>  </core-label></td>
+          <td style="width:340px; font-size: 12px;" colspan="5" align="center"><core-label>Developped by: <a href="http://www.aceshooting.com">www.aceshooting.com</a>  </core-label></td>
       </tr>        
     </table>
     
