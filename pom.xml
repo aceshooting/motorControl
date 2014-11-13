@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>testpi</groupId>
-    <artifactId>testpi</artifactId>
+    <groupId>motorConrol</groupId>
+    <artifactId>motorConrol</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <version.io.undertow>1.0.11.Final</version.io.undertow>
@@ -76,7 +76,7 @@
                 <configuration>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>testpi.App</mainClass>
+                            <mainClass>aceshooting.AppGpIO</mainClass>
                         </transformer>
                     </transformers>
                 </configuration>
