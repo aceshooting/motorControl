@@ -100,18 +100,23 @@
         }
         
     function sendState(){
-        if(document.getElementById("btnState").checked){
-            send("start");
+        if(document.getElementById("btnState").innerText == "Start"){
+            
+			document.getElementById("btnState").innerText ="Stop";
+			send("start");
         }
-        else{
-            send("stop");
+        else{           
+			document.getElementById("btnState").innerText ="Start";
+			send("stop");
         }
     }
         function sendDirection(){
-            if(document.getElementById("btnDirection").checked){
+            if(document.getElementById("btnDirection").innerText == "Forward"){
+			document.getElementById("btnDirection").innerText = "Backward";
             send("forward");
         }
         else{
+			document.getElementById("btnDirection").innerText = "Forward";
             send("backward");
         }
     }
@@ -131,33 +136,32 @@
     <table style="table-layout: fixed;width: 300px; height:200px">
           <col width="50px">
   <col width="50px">
-          <col width="100px">
+          <col width="50px">
   <col width="50px">
           <col width="50px">
          <tr style="height:40px">
           <td style="width:300px; font-size: 12px; font-weight: bold;" colspan="5"><core-label>Please select runtime & stoptime (in ms):</core-label></td>
       </tr>
       <tr style="height:40px">
-          <td style="width:50px"><button type="button" style="width:50" id="btnr1000" onclick="calcR('-1000');">-1sec</button></td>
-          <td style="width:50px"><button type="button" style="width:50" id="btnr50" onclick="calcR('-50');">-50ms</button></td>
-          <td style="width:80px"><input type="text" name="rval" id ="rval" value="2000" style="width: 90px;"></input></td>          
-          <td style="width:50px"><button type="button" style="width:50" onclick="calcR('+50');">+50ms</button></td>
-          <td style="width:50px"><button type="button" style="width:50" onclick="calcR('+1000');">+1sec</button></td>
+          <td style="width:50px" align="center"><button type="button" style="width:50" id="btnr1000" onclick="calcR('-1000');">-1sec</button></td>
+          <td style="width:50px" align="center"><button type="button" style="width:50" id="btnr50" onclick="calcR('-50');">-50ms</button></td>
+          <td style="width:50px" align="center"><input type="text" name="rval" id ="rval" value="2000" style="width: 50px;"></input></td>          
+          <td style="width:50px" align="center"><button type="button" style="width:50" onclick="calcR('+50');">+50ms</button></td>
+          <td style="width:50px" align="center"><button type="button" style="width:50" onclick="calcR('+1000');">+1sec</button></td>
       </tr>
          <tr style="height:40px">
-          <td style="width:50px"><button type="button" style="width:55" id="btns1000" onclick="calcS('-1000');">-1sec</button></td>
-          <td style="width:50px"><button type="button" style="width:50" id="btns50" onclick="calcS('-50');">-50ms</button></td>
-          <td style="width:80px"><input type="text" name="sval" id ="sval" value="2000" style="width: 90px;"></input></td>          
-          <td style="width:50px"><button type="button" style="width:50"  onclick="calcS('+50');">+50ms</button></td>
-          <td style="width:50px"><button type="button" style="width:50" onclick="calcS('+1000');">+1sec</button></td>
+          <td style="width:50px" align="center"><button type="button" style="width:50" id="btns1000" onclick="calcS('-1000');">-1sec</button></td>
+          <td style="width:50px" align="center"><button type="button" style="width:50" id="btns50" onclick="calcS('-50');">-50ms</button></td>
+          <td style="width:50px" align="center"><input type="text" name="sval" id ="sval" value="2000" style="width: 50px;"></input></td>          
+          <td style="width:50px" align="center"><button type="button" style="width:50"  onclick="calcS('+50');">+50ms</button></td>
+          <td style="width:50px" align="center"><button type="button" style="width:50" onclick="calcS('+1000');">+1sec</button></td>
       </tr>        
         
          <tr style="height:40px">
 		 
-          <td style="width:80px" colspan="2" align="center"><label><input type="checkbox" name="btnState" id="btnState" value="btnState" style="width:80px" id="btnState" onclick="sendState()">Start</label></td>
-             <td style="width:100px"><button style="width:100px; background: #f41e1e;" onclick="send('shutdown');">Shutdown</button></td>			
-            <td style="width:80px" colspan="2" align="center"> <label><input type="checkbox" name="btnDirection" id="btnDirection" value="btnDirection" style="width:80px" id="btnDirection" onclick="sendDirection()">Forward</label></td>
-           
+		 <td style="width:60px" colspan="2" align="center"><button type="button" style="width:50" id="btnState" onclick="sendState()">Start</button></td>
+             <td style="width:50px"><button style="width:70px; background: #f41e1e;" onclick="send('shutdown');">Shutdown</button></td>
+ <td style="width:60px" colspan="2" align="center"><button type="button" style="width:50" id="btnDirection" onclick="sendDirection()">Forward</button></td>	
       </tr>     
       <tr style="height:30px"> 
           <td style="width:340px; font-size: 12px;" colspan="5" align="center"><core-label>Developped by: <a href="http://www.aceshooting.com">www.aceshooting.com</a>  </core-label></td>

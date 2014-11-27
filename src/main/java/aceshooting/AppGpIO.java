@@ -8,6 +8,8 @@ import io.undertow.websockets.core.AbstractReceiveListener;
 import io.undertow.websockets.core.BufferedTextMessage;
 import io.undertow.websockets.core.WebSocketChannel;
 import io.undertow.websockets.spi.WebSocketHttpExchange;
+import org.gphoto2.Camera;
+import org.gphoto2.CameraFile;
 
 import java.util.ArrayList;
 
@@ -69,6 +71,9 @@ public class AppGpIO implements Runnable {
 
 
 
+
+
+
            new Thread(new AppGpIO()).start();
 
         Undertow server = Undertow.builder()
@@ -95,8 +100,7 @@ public class AppGpIO implements Runnable {
 
                                                                        {
                                                                            startProcess = true;
-                                                                       } else if (data.equals("stop"))
-                                                                       {
+                                                                       } else if (data.equals("stop")) {
                                                                            startProcess = false;
                                                                        } else if (data.equals("forward"))
 
@@ -106,6 +110,10 @@ public class AppGpIO implements Runnable {
 
                                                                        {
                                                                            directionForward = false;
+                                                                       } else if (data.equals("shutdown")) {
+                                                                           Camera c = new Camera();
+                                                                           c.initialize();
+                                                                           CameraFile cf2 = c.captureImage();
                                                                        }
 
 
