@@ -11,6 +11,7 @@ import io.undertow.websockets.spi.WebSocketHttpExchange;
 import org.gphoto2.Camera;
 import org.gphoto2.CameraFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static io.undertow.Handlers.*;
@@ -111,9 +112,16 @@ public class AppGpIO implements Runnable {
                                                                        {
                                                                            directionForward = false;
                                                                        } else if (data.equals("shutdown")) {
-                                                                           Camera c = new Camera();
+                                                                           String command = "sudo shutdown -h now";
+
+                                                                           try {
+                                                                               Process proc = Runtime.getRuntime().exec(command);
+                                                                           } catch (IOException e) {
+                                                                               e.printStackTrace();
+                                                                           }
+                                                                          /* Camera c = new Camera();
                                                                            c.initialize();
-                                                                           CameraFile cf2 = c.captureImage();
+                                                                           CameraFile cf2 = c.captureImage();*/
                                                                        }
 
 
